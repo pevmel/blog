@@ -1,0 +1,16 @@
+<% provide(:title, "Categories") %>
+<p id="notice"><%= notice %></p>
+
+<h1>Categories</h1>
+<hr>
+<% @categories.each do |category| %>
+    <h4><%= link_to category.name, category %></h4>
+    <p><%= category.description %></p>
+    <% if current_user && (current_user.is_admin? || category.user == current_user) %>
+      <%= link_to 'Edit', edit_category_path(category), class: "btn btn-primary btn-sm" %>
+      <%= link_to 'Delete', category, method: :delete,
+            data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %>
+    <% end %>
+    <hr>
+<% end %>
+<%= link_to 'New Category', new_category_path, class: "btn btn-primary" %>

@@ -4,10 +4,20 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-   before_save { self.email = email.downcase }
+  validates :name,
+      presence: true,
+      uniqueness: true,
+      format: { with: /([A-ZА-ЯЁ]\.?(\s[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё]+\w*\.?){2,}|[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё]+\w*\.?(\s[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё]+\w*\.?)+)/,
+        message: "must contain at least 2 words with 2 letters or more, and every word must begin with a capital letter." }
+  validate :dot_in_name
 
-  validates :name,  presence: true, length: { minimum: 5 }
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, presence: true, length: { maximum: 255 },
-                    format: { with: VALID_EMAIL_REGEX }
+  has_many :categories
+  has_many :posts
+
+  private
+
+    def dot_in_name
+      errors.add(:name, 'must contain at least one period symbol (.)') unless name.include? ?.
+    end
+
 end

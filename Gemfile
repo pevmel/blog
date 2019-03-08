@@ -29,6 +29,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 # Use ActiveStorage variant
 gem 'mini_magick', '~> 4.8'
+gem 'carrierwave'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -38,6 +39,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
+gem "font-awesome-rails"
 
 gem 'devise'
 gem 'devise-bootstrap-views'

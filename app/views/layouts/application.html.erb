@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Blog</title>
+    <title><%= full_title(yield(:title)) %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,25 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render 'layouts/header' %>
+    <div class="container mt-2">
+      <% flash.each do |message_type, message| %>
+      <% if message_type == "notice" %>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <% elsif message_type == "alert" %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <% else %>
+        <div class="alert alert-<%= message_type %> alert-dismissible fade show" role="alert" >
+      <% end %>
+          <%= message %>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      <% end %>
+      <%= yield %>
+    </div
+    <%= render 'layouts/footer' %>
+    <%= debug(params) if Rails.env.development? %>
   </body>
 </html>
