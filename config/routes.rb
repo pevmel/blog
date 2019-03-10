@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :posts
   resources :categories
+  resources :authors, only: [:index, :show]
+  post "comment", to: "comments#create"
   devise_for :users, controllers: {
     registrations: 'users/registrations'
   }

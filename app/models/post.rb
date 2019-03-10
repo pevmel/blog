@@ -1,7 +1,10 @@
 class Post < ApplicationRecord
+  require 'concerns/validation.rb'
+  include Validation
+
   belongs_to :user
   belongs_to :category
-
+  has_many :comments, as: :supplier, dependent: :destroy
   mount_uploader :file, FileUploader
 
   validates :name,
@@ -14,10 +17,6 @@ class Post < ApplicationRecord
   validate :file_size
 
   private
-
-    def dot_in_name
-      errors.add(:name, 'must contain at least one period symbol (.)') unless name.include? ?.
-    end
 
     def file_size
       errors.add(:file, 'must be not more then 2MB') if file.size > 2.megabytes

@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  require 'concerns/validation.rb'
+  include Validation
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -13,11 +15,6 @@ class User < ApplicationRecord
 
   has_many :categories
   has_many :posts
-
-  private
-
-    def dot_in_name
-      errors.add(:name, 'must contain at least one period symbol (.)') unless name.include? ?.
-    end
+  has_many :comments
 
 end

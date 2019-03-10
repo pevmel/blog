@@ -1,6 +1,10 @@
 class Category < ApplicationRecord
+  require 'concerns/validation.rb'
+  include Validation
+
   belongs_to :user
   has_many :posts
+  has_many :comments, as: :supplier, dependent: :destroy
 
   validates :name,
     presence: true,
@@ -9,9 +13,4 @@ class Category < ApplicationRecord
       message: "must start with a capital letter and contain at least 2 words with 2 letters or more." }
   validate :dot_in_name
 
-  private
-
-    def dot_in_name
-      errors.add(:name, 'must contain at least one period symbol (.)') unless name.include? ?.
-    end
 end

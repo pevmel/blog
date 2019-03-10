@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_07_110838) do
+ActiveRecord::Schema.define(version: 2019_03_08_173613) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,7 +21,19 @@ ActiveRecord::Schema.define(version: 2019_03_07_110838) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.index ["name"], name: "index_categories_on_name", unique: true
     t.index ["user_id"], name: "index_categories_on_user_id"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text "content"
+    t.bigint "user_id"
+    t.string "supplier_type"
+    t.bigint "supplier_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["supplier_type", "supplier_id"], name: "index_comments_on_supplier_type_and_supplier_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -33,6 +45,7 @@ ActiveRecord::Schema.define(version: 2019_03_07_110838) do
     t.bigint "category_id"
     t.bigint "user_id"
     t.index ["category_id"], name: "index_posts_on_category_id"
+    t.index ["name"], name: "index_posts_on_name", unique: true
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -47,10 +60,12 @@ ActiveRecord::Schema.define(version: 2019_03_07_110838) do
     t.string "name", default: "", null: false
     t.boolean "is_admin", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["name"], name: "index_users_on_name", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "categories", "users"
+  add_foreign_key "comments", "users"
   add_foreign_key "posts", "categories"
   add_foreign_key "posts", "users"
 end

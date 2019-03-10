@@ -1,0 +1,8 @@
+<h4><%= link_to post.name, post %></h4>
+<p><%= truncate(post.content, length: 200) %>...</p>
+<% if current_user && (current_user.is_admin? || post.user == current_user) %>
+  <%= link_to 'Edit', edit_post_path(post), class: "btn btn-primary btn-sm" %>
+  <%= link_to 'Delete', post, method: :delete,
+        data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %>
+<% end %>
+<hr>

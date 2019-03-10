@@ -9,23 +9,22 @@
 <p>
   <%= @category.description %>
 </p>
-
-<% if @posts.empty? %>
-  <h2>There are no Posts in this Category</h2>
-<% else %>
-  <h2>Posts</h2>
-  <hr>
-  <% @posts.each do |post| %>
-    <h4><%= link_to post.name, post %></h4>
-    <p><%= truncate(post.content, length: 200) %>...</p>
-    <% if current_user && (current_user.is_admin? || post.user == current_user) %>
-      <%= link_to 'Edit', edit_post_path(post), class: "btn btn-primary btn-sm" %>
-      <%= link_to 'Delete', post, method: :delete,
-            data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %>
+<hr>
+<dev class="row">
+  <dev class="col-md-7 mb-5">
+    <% if @posts.empty? %>
+      <h2>There are no Posts in this Category</h2>
+    <% else %>
+      <h2>Posts</h2>
+      <hr>
+      <%= render @posts %>
     <% end %>
-    <hr>
-  <% end %>
-<% end %>
 
-<%= link_to "Add a new Post", new_post_path(category_id: @category.id), class: "btn btn-primary" %>
-<%= link_to 'Back to Categories', categories_path, class: "btn btn-secondary" %>
+    <%= link_to "Add a new Post", new_post_path(category_id: @category.id), class: "btn btn-primary" %>
+    <%= link_to 'Back to Categories', categories_path, class: "btn btn-secondary" %>
+  </dev>
+  <dev class="col-md-5">
+    <%= render "comments/form" %>
+    <%= render @comments %>
+  </dev>
+</dev>

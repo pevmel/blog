@@ -8,6 +8,10 @@ class CategoriesController < ApplicationController
 
   def show
     @posts = Post.where(category: params[:id])
+    @comment = Comment.new
+    @comment.supplier_type = "Category"
+    @comment.supplier_id = params[:id]
+    @comments = Comment.where(supplier_type: "Category", supplier_id: params[:id])
   end
 
   def new
@@ -18,10 +22,10 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    @category = Category.new(category_params)
-    @category.user = current_user
-    if @category.save
-      redirect_to @category
+    category = Category.new(category_params)
+    category.user = current_user
+    if category.save
+      redirect_to category
       flash[:success] = "Category was successfully created."
     else
       render :new
