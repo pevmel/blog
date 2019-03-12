@@ -5,7 +5,12 @@ class PostsController < ApplicationController
   def index
     redirect_to categories_url
   end
+
   def show
+    @comment = Comment.new
+    @comment.supplier_type = "Post"
+    @comment.supplier_id = params[:id]
+    @comments = Comment.where(supplier_type: "Post", supplier_id: params[:id])
   end
 
   def new
@@ -17,8 +22,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.create(post_params)
-    @post.user = current_user
+    @post = current_user.posts.build(post_params)
     if @post.save
       redirect_to @post
       flash[:success] = 'Post was successfully created.'

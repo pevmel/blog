@@ -1,36 +1,35 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <%= link_to "Blog", root_path, class: "navbar-brand" %>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <div class="container">
+      <%= link_to "Blog", root_path, class: "navbar-brand" %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <%= link_to "Categories", categories_url, class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Authors", authors_url, class: "nav-link" %>
-        </li>
-      </ul>
-      <ul class="my-2 my-lg-0 navbar-nav">
-        <% if current_user %>
-          <li class="mt-2 mr-3">
-            <%= link_to (fa_icon("user") + " " + truncate(current_user.name, length: 25)).html_safe,
-                                      edit_user_registration_path, title: "Edit profile" %>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <%= link_to "Categories", categories_url, class: "nav-link" %>
           </li>
-          <li class="pull-right">
-            <%= link_to "Logout", destroy_user_session_path, class: "btn btn-danger", method: :delete,
-                                      title: "Logout" %>
-          </li>
-        <% else %>
-          <li class="pull-right">
-            <%= link_to "Login", new_user_session_path, class: "btn btn-primary", title: "Login" %>
-            <%= link_to "Sign up", new_user_registration_path, class: "btn btn-success", title: "Sign up" %>
-          </li>
-        <% end %>
-      </ul>
+        </ul>
+        <ul class="my-2 my-lg-0 navbar-nav">
+          <% if current_user %>
+            <li class="mt-2 mr-3">
+              <%= link_to (fa_icon("user") + " " + truncate(current_user.name, length: 25)).html_safe,
+                                        edit_user_registration_path, title: "Edit profile" %>
+            </li>
+            <li class="pull-right">
+              <%= link_to "Logout", destroy_user_session_path, class: "btn btn-danger", method: :delete,
+                                        title: "Logout" %>
+            </li>
+          <% else %>
+            <li class="pull-right">
+              <%= link_to "Login", new_user_session_path, class: "btn btn-primary", title: "Login" %>
+              <%= link_to "Sign up", new_user_registration_path, class: "btn btn-success", title: "Sign up" %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
     </div>
   </nav>
 </header>

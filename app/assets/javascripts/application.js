@@ -17,3 +17,13 @@
 //= require popper
 //= require bootstrap
 //= require_tree .
+
+$(document).on('turbolinks:load', function() {
+  $('#comment-field')
+    .on("input", function() {
+      if(this.value.trim() !== "") {
+        $('#comment-button').removeAttr('disabled');
+      }
+    })
+  ;
+})

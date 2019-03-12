@@ -1,18 +1,17 @@
-<p id="notice"><%= notice %></p>
+<% provide(:title, "#{@post.name}") %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @post.name %>
-</p>
-
-<p>
-  <strong>Content:</strong>
-  <%= @post.content %>
-</p>
-
-<p>
-  <strong>File:</strong>
-  <%= @post.file %>
-</p>
-
-<%= link_to 'Back', category_path(@post.category) %>
+<h1><%= @post.name %></h1>
+<dev class="row">
+  <dev class="col-lg-7 mb-5">
+    <%= image_tag(@post.file.url, width: '100%', class: "mb-2") if @post.file? %>
+    <p><%= @post.content %></p>
+    <hr>
+    <%= link_to 'Back to Category', category_path(@post.category), class: "btn btn-secondary" %>
+  </dev>
+  <dev class="col-lg-5">
+    <%= render "comments/form" %>
+    <dev id="comments_post_<%= @post.id %>">
+      <%= render @comments %>
+    </dev>
+  </dev>
+</dev>

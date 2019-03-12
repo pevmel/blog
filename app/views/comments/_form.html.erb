@@ -1,11 +1,16 @@
-<%= form_for(@comment, url: comment_path) do |f| %>
+<%= form_for(@comment, url: comment_path, id: "comment-form", remote: true) do |f| %>
   <div class="form-group">
       <%= f.hidden_field :supplier_type %>
       <%= f.hidden_field :supplier_id %>
-      <%= f.text_area :content, class: "form-control", placeholder: "Enter your comment..." %>
+      <%= f.text_area :content, class: "form-control", id: "comment-field",
+                      maxlength: "500", placeholder: "Enter your comment..." %>
   </div>
-  <div class="form-group clearfix">
-      <%= f.button "Add Comment", class: "btn btn-primary btn-sm float-right" %>
+  <div class="clearfix">
+      <% if current_user %>
+        <%= f.button "Add Comment", class: "btn btn-primary btn-sm float-right", id: "comment-button", disabled: true %>
+      <% else %>
+        <p class="text-danger float-right">You need to loggin to add your comments!</p>
+      <% end %>
   </div>
 <% end %>
 <hr>

@@ -7,14 +7,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :name,
-      presence: true,
-      uniqueness: true,
       format: { with: /([A-ZА-ЯЁ]\.?(\s[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё]+\w*\.?){2,}|[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё]+\w*\.?(\s[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё]+\w*\.?)+)/,
         message: "must contain at least 2 words with 2 letters or more, and every word must begin with a capital letter." }
   validate :dot_in_name
 
   has_many :categories
   has_many :posts
-  has_many :comments
+  has_many :comments, dependent: :destroy
 
 end

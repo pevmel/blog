@@ -1,30 +1,27 @@
 <% provide(:title, "#{@category.name}") %>
-<p id="notice"><%= notice %></p>
 
 <h1>
-  <small>Category: </small>
+  <small>Posts in category: </small>
   "<%= @category.name %>"
 </h1>
-
-<p>
-  <%= @category.description %>
-</p>
+<p><%= @category.description %></p>
 <hr>
+
 <dev class="row">
-  <dev class="col-md-7 mb-5">
+  <dev class="col-lg-7 mb-5">
     <% if @posts.empty? %>
       <h2>There are no Posts in this Category</h2>
     <% else %>
-      <h2>Posts</h2>
-      <hr>
       <%= render @posts %>
     <% end %>
 
     <%= link_to "Add a new Post", new_post_path(category_id: @category.id), class: "btn btn-primary" %>
     <%= link_to 'Back to Categories', categories_path, class: "btn btn-secondary" %>
   </dev>
-  <dev class="col-md-5">
+  <dev class="col-lg-5">
     <%= render "comments/form" %>
-    <%= render @comments %>
+    <dev id="comments_category_<%= @category.id %>">
+      <%= render @comments %>
+    </dev>
   </dev>
 </dev>

@@ -7,10 +7,9 @@ class Category < ApplicationRecord
   has_many :comments, as: :supplier, dependent: :destroy
 
   validates :name,
-    presence: true,
     uniqueness: true,
     format: { with: /([A-ZА-ЯЁ]\.?\s.*[A-Za-zА-Яа-яЁё]{2,}.*\s.*[A-Za-zА-Яа-яЁё]{2,}.*|[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё]+.*\s.*[A-Za-zА-Яа-яЁё]{2,}.*)/,
-      message: "must start with a capital letter and contain at least 2 words with 2 letters or more." }
+      message: "must begin with a capital letter and contain at least 2 words with 2 letters or more." }
   validate :dot_in_name
 
 end

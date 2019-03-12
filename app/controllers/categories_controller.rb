@@ -22,10 +22,9 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    category = Category.new(category_params)
-    category.user = current_user
-    if category.save
-      redirect_to category
+    @category = current_user.categories.build(category_params)
+    if @category.save
+      redirect_to @category
       flash[:success] = "Category was successfully created."
     else
       render :new
@@ -42,7 +41,7 @@ class CategoriesController < ApplicationController
       end
     else
       redirect_to categories_url
-      flash[:alert] = "You can't change the Category which you didn't create."
+      flash[:alert] = "You can't change the Category created by you."
     end
   end
 
@@ -57,7 +56,7 @@ class CategoriesController < ApplicationController
         flash[:success] = 'Category was successfully destroyed.'
       else
         redirect_to categories_url
-        flash[:alert] = "You can't delete the Category which you didn't create."
+        flash[:alert] = "You can't delete the Category created by you."
       end
     end
   end

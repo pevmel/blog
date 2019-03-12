@@ -1,28 +1,18 @@
 <%= form_for(post) do |form| %>
-
-  <% if post.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
-      <ul>
-      <% post.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render "layouts/warnings", category: post %>
 
   <div class="form-group">
     <%= form.label :name %>
-    <%= form.text_field :name, autofocus: true, autocomplete: 'name', class: 'form-control' %>
+    <%= form.text_field :name, autofocus: true, class: 'form-control' %>
   </div>
 
   <div class="form-group">
     <%= form.label :content %>
-    <%= form.text_area :content, autocomplete: 'content', class: 'form-control' %>
+    <%= form.text_area :content, class: 'form-control' %>
   </div>
 
   <div class="form-group">
-    <%= form.file_field :file %>
+      <%= form.file_field :file, accept: 'image/jpeg,image/gif,image/png' %>
   </div>
 
   <%= form.hidden_field :category_id %>

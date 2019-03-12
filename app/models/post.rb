@@ -8,7 +8,6 @@ class Post < ApplicationRecord
   mount_uploader :file, FileUploader
 
   validates :name,
-    presence: true,
     uniqueness: true,
     format: { with: /([A-ZА-ЯЁ]\.?\s.*[A-Za-zА-Яа-яЁё]{2,}.*\s.*[A-Za-zА-Яа-яЁё]{2,}.*|[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё]+.*\s.*[A-Za-zА-Яа-яЁё]{2,}.*)/,
       message: "must begin with a capital letter and contain at least 2 words with 2 letters or more." }
