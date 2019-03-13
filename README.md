@@ -1,24 +1,21 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Не реалізовано
 
-Things you may want to cover:
+* Не використовував React + Redux + React-router, бо поки не розбирався в них.
+* Не покривав тестами.
 
-* Ruby version
+В решті пунктів, завдання повністю виконане.
 
-* System dependencies
+### Додатковий функціонал
 
-* Configuration
+Для реєстрації та ідентифікації користувачів, використав гем Devise. Додавати
+нові категорії, пости чи коментарі може лише залогінений користувач. Вносити
+зміни в категорії чи пости, а також видаляти їх може лише користувач, який їх
+створював або адміністратор. Адміністратори додаються до бази даних через
+db/seeds.rb. Наразі там прописаний один з email: 'admin@admin.com',
+password: 'animda'.
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Для поширення коментарів використав Websockets, а саме ActionCable. Таким чином
+коментар з'являється без перезавантаження сторінки не тільки в користувача, який
+його створив, а й у всіх, в кого ця сторінка відкрита.
