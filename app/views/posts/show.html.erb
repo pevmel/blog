@@ -4,7 +4,7 @@
 <dev class="row">
   <dev class="col-lg-7 mb-5">
     <%= image_tag(@post.file.url, width: '100%', class: "mb-2") if @post.file? %>
-    <p><%= @post.content %></p>
+    <div><%= @post.content %></div>
     <hr>
     <%= link_to 'Back to Category', category_path(@post.category), class: "btn btn-secondary" %>
   </dev>
